@@ -31,14 +31,24 @@
                                     <constraint firstAttribute="height" constant="240" id="psL-Oz-MHY"/>
                                 </constraints>
                             </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="niA-BN-tWd">
-                                <rect key="frame" x="94" y="518" width="132" height="30"/>
+                            <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" horizontalCompressionResistancePriority="1000" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="niA-BN-tWd">
+                                <rect key="frame" x="20" y="518" width="133" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Upload New Image">
+                                <state key="normal" title="Upload New">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
                                     <action selector="uploadImage:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="p4M-7N-wDe"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="s3L-oW-Nsp">
+                                <rect key="frame" x="214" y="518" width="86" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Show Image">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="showImage:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="ewy-og-po9"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -47,11 +57,14 @@
                             <constraint firstItem="QwF-Dm-4d1" firstAttribute="top" secondItem="IsI-VC-GUb" secondAttribute="bottom" constant="69" id="7BS-Ph-pmM"/>
                             <constraint firstAttribute="centerX" secondItem="QwF-Dm-4d1" secondAttribute="centerX" id="8Ag-ZJ-Rud"/>
                             <constraint firstItem="QwF-Dm-4d1" firstAttribute="centerY" secondItem="kh9-bI-dsS" secondAttribute="centerY" id="EkZ-EE-Tnf"/>
+                            <constraint firstItem="niA-BN-tWd" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" constant="20" id="JFW-sY-pCR"/>
                             <constraint firstItem="QwF-Dm-4d1" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" constant="40" id="OI7-BT-iyM"/>
                             <constraint firstItem="IsI-VC-GUb" firstAttribute="top" secondItem="jyV-Pf-zRb" secondAttribute="bottom" constant="22" id="PRa-3n-M8a"/>
+                            <constraint firstAttribute="trailing" secondItem="s3L-oW-Nsp" secondAttribute="trailing" constant="20" id="RBt-Wy-5u0"/>
                             <constraint firstItem="2fi-mo-0CV" firstAttribute="top" secondItem="niA-BN-tWd" secondAttribute="bottom" constant="20" id="RUm-2f-KEz"/>
                             <constraint firstAttribute="centerX" secondItem="IsI-VC-GUb" secondAttribute="centerX" id="cgq-Sr-R0u"/>
-                            <constraint firstAttribute="centerX" secondItem="niA-BN-tWd" secondAttribute="centerX" id="z4z-zm-jVD"/>
+                            <constraint firstItem="2fi-mo-0CV" firstAttribute="top" secondItem="s3L-oW-Nsp" secondAttribute="bottom" constant="20" id="jSW-PA-Gff"/>
+                            <constraint firstAttribute="centerX" secondItem="niA-BN-tWd" secondAttribute="centerX" constant="73.5" id="z4z-zm-jVD"/>
                         </constraints>
                     </view>
                     <connections>
