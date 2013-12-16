@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="5037" systemVersion="13A603" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" useAutolayout="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="5037" systemVersion="13A603" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" useAutolayout="YES" initialViewController="hh7-EU-e4H">
     <dependencies>
         <deployment defaultVersion="1552" identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--View Controller - Cloud Images-->
         <scene sceneID="tne-QT-ifu">
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="ViewController" sceneMemberID="viewController">
@@ -18,13 +18,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Cloud Images" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Uav-NF-kve">
-                                <rect key="frame" x="314" y="34" width="141" height="27"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="22"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="XVi-Aq-0hO">
                                 <rect key="frame" x="84" y="212" width="600" height="600"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -32,46 +25,52 @@
                                     <constraint firstAttribute="width" secondItem="XVi-Aq-0hO" secondAttribute="height" multiplier="1:1" id="Vte-yY-qDq"/>
                                 </constraints>
                             </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2Um-ga-h99">
-                                <rect key="frame" x="84" y="974" width="96" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Upload Image">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="uploadImage:" destination="BYZ-38-t0r" eventType="touchUpInside" id="YrS-LT-VIn"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VrA-hF-QhS">
-                                <rect key="frame" x="598" y="974" width="86" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Show Image">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="showImage:" destination="BYZ-38-t0r" eventType="touchUpInside" id="qA2-BK-Eud"/>
-                                </connections>
-                            </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="0.40000000600000002" blue="0.40000000600000002" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="2Um-ga-h99" secondAttribute="bottom" constant="20" id="9U3-dV-oVk"/>
-                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="VrA-hF-QhS" secondAttribute="bottom" constant="20" id="BAY-UQ-zvF"/>
                             <constraint firstItem="XVi-Aq-0hO" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="84" id="QME-xQ-ZjG"/>
-                            <constraint firstAttribute="centerX" secondItem="Uav-NF-kve" secondAttribute="centerX" id="T6f-ZZ-qyO"/>
-                            <constraint firstItem="Uav-NF-kve" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="14" id="WUE-nC-IhX"/>
                             <constraint firstAttribute="centerY" secondItem="XVi-Aq-0hO" secondAttribute="centerY" id="eHp-Sd-KaW"/>
-                            <constraint firstItem="2Um-ga-h99" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="84" id="eNR-2i-cW9"/>
                             <constraint firstAttribute="trailing" secondItem="XVi-Aq-0hO" secondAttribute="trailing" constant="84" id="y79-h5-WZW"/>
-                            <constraint firstAttribute="trailing" secondItem="VrA-hF-QhS" secondAttribute="trailing" constant="84" id="zTF-X4-ays"/>
                         </constraints>
                     </view>
+                    <navigationItem key="navigationItem" title="Cloud Images" id="VpG-LK-Fsk">
+                        <barButtonItem key="leftBarButtonItem" title="Upload Image" id="aRk-BV-E0R">
+                            <connections>
+                                <action selector="uploadImage:" destination="BYZ-38-t0r" id="Lc6-bN-13S"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" title="Show Image" id="Kfn-1Z-6VS">
+                            <connections>
+                                <action selector="showImage:" destination="BYZ-38-t0r" id="6L8-V8-Qx5"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="imageView" destination="XVi-Aq-0hO" id="efm-ID-gLe"/>
+                        <outlet property="leftBarButton" destination="aRk-BV-E0R" id="Aih-65-vRp"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="991" y="-14"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="JGC-RO-Z8e">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="hh7-EU-e4H" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="fXx-fo-BkT">
+                        <rect key="frame" x="0.0" y="0.0" width="768" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="RNv-DK-nK5"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="TkF-BE-1R8" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="61" y="-14"/>
         </scene>
     </scenes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">

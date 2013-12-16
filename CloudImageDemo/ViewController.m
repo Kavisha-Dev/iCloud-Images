@@ -10,7 +10,10 @@
 
 @interface ViewController ()
 
+@property (strong, nonatomic) IBOutlet UIBarButtonItem *leftBarButton;
 @property (strong, nonatomic) IBOutlet UIImageView *imageView;
+@property (strong, nonatomic) UIPopoverController *popovercontroller;
+
 - (IBAction)uploadImage:(id)sender;
 - (IBAction)showImage:(id)sender;
 
@@ -24,7 +27,6 @@
 	// Do any additional setup after loading the view, typically from a nib.
 }
 
-
 #pragma mark - Image Picker
 
 - (IBAction)uploadImage:(id)sender {
@@ -36,14 +38,27 @@
     myPicker.delegate = self;
     
     // now we present the picker
-    [self presentViewController:myPicker animated:YES completion:nil];
+    if (UIUserInterfaceIdiomPad) {
+        // present this as a Popover
+        self.popovercontroller = [[UIPopoverController alloc]initWithContentViewController:myPicker];
+        [self.popovercontroller presentPopoverFromBarButtonItem:self.leftBarButton permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
+        
+    } else {
+        [self presentViewController:myPicker animated:YES completion:nil];
+    }
 }
 
 
 // an image is selected
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
 {
-    [self dismissViewControllerAnimated:YES completion:nil];
+    if (UIUserInterfaceIdiomPad) {
+        [self.popovercontroller dismissPopoverAnimated:YES];
+    
+    } else {
+        [self dismissViewControllerAnimated:YES completion:nil];
+    }
+    
     UIImage *chosenImage = [info objectForKey:UIImagePickerControllerOriginalImage];
     // self.imageView.image = chosenImage;
     
@@ -54,7 +69,13 @@
 // user hits cancel
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
 {
-    [self dismissViewControllerAnimated:YES completion:nil];
+    if (UIUserInterfaceIdiomPad) {
+        [self.popovercontroller dismissPopoverAnimated:YES];
+    
+    } else {
+        [self dismissViewControllerAnimated:YES completion:nil];
+    }
+    
 }
 
 - (IBAction)showImage:(id)sender {
