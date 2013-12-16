@@ -48,7 +48,7 @@
     // self.imageView.image = chosenImage;
     
     // instead of displaying the image, let's save it to our Documents directory
-    [self saveImageToDocuments:chosenImage];
+    [self saveImageToCloudDocuments:chosenImage];
 }
 
 // user hits cancel
@@ -60,11 +60,12 @@
 - (IBAction)showImage:(id)sender {
     
     // load image from documents and display it
-    self.imageView.image = [self loadFromDocuments];
+    self.imageView.image = [self loadFromCloudDocuments];
 }
 
 
-#pragma mark - File Save methods
+#pragma mark - Local File methods
+// same as below, referencing the local Documents directory
 
 - (void)saveImageToDocuments:(UIImage *)image {
     
@@ -89,7 +90,6 @@
     return image;
 }
 
-
 - (NSString *)grabFilePath:(NSString *)fileName {
     
     NSString *filePath = [[NSString alloc]initWithFormat:@"Documents/%@", fileName];
@@ -97,5 +97,48 @@
     
     return documentsFilePath;
 }
+
+
+#pragma mark - Cloud File methods
+// these methods are identical to the ones above, but reference the Ubiquity Containter instead
+
+- (void)saveImageToCloudDocuments:(UIImage *)image {
+    
+    NSData *imageData = UIImageJPEGRepresentation(image, 1);
+    NSString *filePath = [self grabCloudPath:@"testPicture"];
+    [imageData writeToFile:filePath atomically:YES];
+}
+
+- (UIImage *)loadFromCloudDocuments {
+    
+    NSString *filePath = [self grabCloudPath:@"testPicture"];
+    BOOL fileExists = [[NSFileManager defaultManager] fileExistsAtPath:filePath];
+    UIImage *image = [[UIImage alloc]init];
+    
+    if (!fileExists) {
+        NSLog(@"File does not exist.");
+    } else {
+        // load image from Ubiquity Documents directory
+        NSData *imageData = [NSData dataWithContentsOfFile:filePath];
+        image = [UIImage imageWithData:imageData];
+    }
+    return image;
+}
+
+- (NSString *)grabCloudPath:(NSString *)fileName {
+    
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    NSString *teamID = @"F34HMY85N9";
+    NSString *bundleID = [[NSBundle mainBundle]bundleIdentifier];
+    NSString *cloudRoot = [NSString stringWithFormat:@"%@.%@", teamID, bundleID];
+    
+    NSURL *cloudRootURL = [fileManager URLForUbiquityContainerIdentifier:cloudRoot];
+    
+    NSString *pathToCloudFile = [[cloudRootURL path]stringByAppendingPathComponent:@"Documents"];
+    pathToCloudFile = [pathToCloudFile stringByAppendingPathComponent:fileName];
+    
+    return pathToCloudFile;
+}
+
 
 @end
