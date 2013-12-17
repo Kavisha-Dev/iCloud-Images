@@ -13,6 +13,7 @@
 @property (strong, nonatomic) IBOutlet UIBarButtonItem *leftBarButton;
 @property (strong, nonatomic) IBOutlet UIImageView *imageView;
 @property (strong, nonatomic) UIPopoverController *popovercontroller;
+@property (strong, nonatomic) NSMetadataQuery *query;
 
 - (IBAction)uploadImage:(id)sender;
 - (IBAction)showImage:(id)sender;
@@ -24,8 +25,32 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	// Do any additional setup after loading the view, typically from a nib.
+    
+    // if we have an image, load it
+    self.imageView.image = [self loadFromCloudDocuments];
+	
+    // observer to refresh image on iCloud change via NSMetadataQuery
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(updateImage) name:NSMetadataQueryDidUpdateNotification object:self.query];
+    
 }
+
+- (NSMetadataQuery *)query {
+    if (!_query) {
+        _query = [[NSMetadataQuery alloc]init];
+        
+        NSArray *scopes = @[NSMetadataQueryUbiquitousDocumentsScope];
+        _query.searchScopes = scopes;
+        
+        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"%K like %@", NSMetadataItemFSNameKey, @"*"];
+        _query.predicate = predicate;
+        
+        if (![_query startQuery]) {
+            NSLog(@"Query didn't start... for whatever reason");
+        }
+    }
+    return _query;
+}
+
 
 #pragma mark - Image Picker
 
@@ -38,7 +63,7 @@
     myPicker.delegate = self;
     
     // now we present the picker
-    if (UIUserInterfaceIdiomPad) {
+    if ([[UIDevice currentDevice]userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
         // present this as a Popover
         self.popovercontroller = [[UIPopoverController alloc]initWithContentViewController:myPicker];
         [self.popovercontroller presentPopoverFromBarButtonItem:self.leftBarButton permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
@@ -52,7 +77,7 @@
 // an image is selected
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
 {
-    if (UIUserInterfaceIdiomPad) {
+    if ([[UIDevice currentDevice]userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
         [self.popovercontroller dismissPopoverAnimated:YES];
     
     } else {
@@ -69,7 +94,7 @@
 // user hits cancel
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
 {
-    if (UIUserInterfaceIdiomPad) {
+    if ([[UIDevice currentDevice]userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
         [self.popovercontroller dismissPopoverAnimated:YES];
     
     } else {
@@ -81,6 +106,12 @@
 - (IBAction)showImage:(id)sender {
     
     // load image from documents and display it
+    self.imageView.image = [self loadFromCloudDocuments];
+}
+
+- (void)updateImage {
+    
+    // called when iCloud sends change notification
     self.imageView.image = [self loadFromCloudDocuments];
 }
 
