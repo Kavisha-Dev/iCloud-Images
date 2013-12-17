@@ -14,6 +14,7 @@
 @property (strong, nonatomic) IBOutlet UIImageView *imageView;
 @property (strong, nonatomic) UIPopoverController *popovercontroller;
 @property (strong, nonatomic) NSMetadataQuery *query;
+@property (strong, nonatomic) NSString *teamID;
 
 - (IBAction)uploadImage:(id)sender;
 - (IBAction)showImage:(id)sender;
@@ -32,6 +33,16 @@
     // observer to refresh image on iCloud change via NSMetadataQuery
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(updateImage) name:NSMetadataQueryDidUpdateNotification object:self.query];
     
+}
+
+
+#pragma mark - Custom Initialisers
+
+- (NSString *)teamID {
+    if (!_teamID) {
+        _teamID = @"F34HMY85N9"; // add your own Team ID here (dont' forget to change your Bundle Identifier too)
+    }
+    return _teamID;
 }
 
 - (NSMetadataQuery *)query {
@@ -180,7 +191,7 @@
 - (NSString *)grabCloudPath:(NSString *)fileName {
     
     NSFileManager *fileManager = [NSFileManager defaultManager];
-    NSString *teamID = @"F34HMY85N9";
+    NSString *teamID = self.teamID;
     NSString *bundleID = [[NSBundle mainBundle]bundleIdentifier];
     NSString *cloudRoot = [NSString stringWithFormat:@"%@.%@", teamID, bundleID];
     
