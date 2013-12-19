@@ -181,6 +181,10 @@
     if (!fileExists) {
         NSLog(@"File does not exist.");
     } else {
+        
+        // download our data first (this does not happen automatically)
+        [[NSFileManager defaultManager]startDownloadingUbiquitousItemAtURL:[NSURL fileURLWithPath:filePath] error:nil];
+        
         // load image from Ubiquity Documents directory
         NSData *imageData = [NSData dataWithContentsOfFile:filePath];
         image = [UIImage imageWithData:imageData];
