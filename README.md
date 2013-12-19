@@ -9,3 +9,5 @@ Requires a Team Identifier and App ID with iCloud enabled.
 * shows image upon change on all devices
 
 The change notification is created by means of an NSMetadataQuery which monitors the iCloud folder.
+
+* http://pinkstone.co.uk/how-to-detect-file-changes-in-your-ubiquitous-icloud-folder/
